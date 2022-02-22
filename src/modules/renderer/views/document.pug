@@ -1,0 +1,35 @@
+mixin prefetchScripts(jsBundles)
+    each js in jsBundles
+        link(rel="preload" as="script" href=js)
+
+mixin loadScripts(jsBundles)
+    each js in jsBundles
+        script(type="text/javascript" src=js defer)
+
+mixin prefetchStyles(cssBundles)
+    each css in cssBundles
+        link(rel="prefetch" as="style" href=css)
+
+mixin loadStyles(cssBundles)
+    each css in cssBundles
+        link(rel="stylesheet" href=css)
+
+doctype html
+html(lang=data.lang)
+    head
+        | !{helmet.title.toString()}
+        | !{helmet.meta.toString()}
+        +prefetchScripts(data.bundles.js)
+        +prefetchStyles(data.bundles.css)
+        | !{helmet.link.toString()}
+        +loadStyles(data.bundles.css)
+        | !{helmet.style.toString()}
+        | !{helmet.noscript.toString()}
+        | !{helmet.script.toString()}
+        | !{helmet.script.toString()}
+        +loadScripts(data.bundles.js)
+    body
+        div#root !{data.markup}
+        script
+            | window.process = !{env.forIndexHtml};
+            | window.__SERVER_DATA__ = !{JSON.stringify(data.data)}
