@@ -5,9 +5,8 @@ import { Request as Req } from 'express';
 
 @Controller()
 export class RenderController {
-
-    @Inject()
-    protected readonly renderService: RenderService;
+  @Inject()
+  protected readonly renderService: RenderService;
 
   @Get('/')
   async render(@Request() req: Req) {
