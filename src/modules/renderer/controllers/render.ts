@@ -1,7 +1,7 @@
 import { Controller, Get, Inject } from '@core';
-import { Request } from '@nestjs/common';
+import { Req } from '@nestjs/common';
 import { RenderService } from '@renderer/services/render';
-import { Request as Req } from 'express';
+import { Request } from 'express';
 
 @Controller()
 export class RenderController {
@@ -9,7 +9,7 @@ export class RenderController {
   protected readonly renderService: RenderService;
 
   @Get('/')
-  async render(@Request() req: Req) {
+  async render(@Req() req: Request) {
     return await this.renderService.render(req.url);
   }
 }
