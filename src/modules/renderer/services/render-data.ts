@@ -4,6 +4,7 @@ import PrePass from 'react-ssr-prepass';
 import { getBundles } from 'react-loadable/webpack';
 import stats from '@build/react-loadable.json';
 import manifest from '@build/asset-manifest.json';
+import { ReactElement } from 'react';
 
 const PUBLIC_URL = 1,
   NODE_ENV = process.env.NODE_ENV;
@@ -20,12 +21,12 @@ export class RenderDataService {
     let data = {};
     return PrePass(
       this.viewsService.views.server(rootComponent, data, location),
-      (element: any) => {
-        if (element && element.type && element.type.loadData) {
-          return element.type.loadData(location).then((d) => {
+      ((element: ReactElement) => {
+        if (element && element.type && (element.type as any).loadData) {
+          return (element.type as any).loadData(location).then((d) => {
             Object.keys(d).forEach((key) => {
               if (data[key]) {
-                console.warn("ass hole you're overriding another widget data");
+                console.warn("data override");
               }
             });
             data = {
@@ -34,7 +35,7 @@ export class RenderDataService {
             };
           });
         }
-      },
+      }) as any,
     ).then(() => {
       return data;
     });

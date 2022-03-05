@@ -17,16 +17,16 @@ mixin loadStyles(cssBundles)
 doctype html
 html(lang=data.lang)
     head
-        | !{helmet.title.toString()}
-        | !{helmet.meta.toString()}
+        //- | !{helmet.title.toString()}
+        //- | !{helmet.meta.toString()}
         +prefetchScripts(data.bundles.js)
         +prefetchStyles(data.bundles.css)
-        | !{helmet.link.toString()}
+        //- | !{helmet.link.toString()}
         +loadStyles(data.bundles.css)
-        | !{helmet.style.toString()}
-        | !{helmet.noscript.toString()}
-        | !{helmet.script.toString()}
-        | !{helmet.script.toString()}
+        //- | !{helmet.style.toString()}
+        //- | !{helmet.noscript.toString()}
+        //- | !{helmet.script.toString()}
+        //- | !{helmet.script.toString()}
         +loadScripts(data.bundles.js)
     body
         div#root !{data.markup}

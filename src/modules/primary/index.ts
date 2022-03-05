@@ -1,6 +1,7 @@
 import { Module } from '@core';
+import { RendererModule } from '@renderer';
 @Module({
-  imports: [],
+  imports: [RendererModule],
   controllers: [],
   providers: [],
 })

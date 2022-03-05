@@ -7,6 +7,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
@@ -14,19 +15,17 @@
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "esModuleInterop": true,                            
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-
+      "@primary": ["./src/modules/primary/index.ts"],
       "@primary/*": ["./src/modules/primary/*"],
-      "@primary": ["./src/modules/primary"],
-
+      "@renderer": ["./src/modules/renderer/index.ts"],
       "@renderer/*": ["./src/modules/renderer/*"],
-      "@renderer": ["./src/modules/renderer"],
-
-      "@core": ["./src/lib/core"],
+      "@core": ["./src/lib/core/index.ts"]
     }
   }
 }
