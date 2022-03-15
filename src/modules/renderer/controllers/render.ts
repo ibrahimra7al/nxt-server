@@ -10,6 +10,10 @@ export class RenderController {
 
   @Get('/')
   async render(@Req() req: Request) {
-    return await this.renderService.render(req.url);
+    return await this.renderService.render(
+      req.url,
+      req.body.dropzones,
+      req.body.pages,
+    );
   }
 }
