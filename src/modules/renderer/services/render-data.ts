@@ -16,17 +16,25 @@ export class RenderDataService {
 
   public preFetchWidgetData(
     rootComponent: (location: string) => JSX.Element,
+    dropzones: any,
+    pages: any,
     location: string,
   ): Promise<any> {
     let data = {};
     return PrePass(
-      this.viewsService.views.server(rootComponent, data, location),
+      this.viewsService.views.server(
+        rootComponent,
+        data,
+        dropzones,
+        pages,
+        location,
+      ),
       ((element: ReactElement) => {
         if (element && element.type && (element.type as any).loadData) {
           return (element.type as any).loadData(location).then((d) => {
             Object.keys(d).forEach((key) => {
               if (data[key]) {
-                console.warn("data override");
+                console.warn('data override');
               }
             });
             data = {

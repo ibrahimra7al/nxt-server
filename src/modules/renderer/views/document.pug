@@ -33,3 +33,6 @@ html(lang=data.lang)
         script
             | window.process = !{env.forIndexHtml};
             | window.__SERVER_DATA__ = !{JSON.stringify(data.data)}
+            | window.__DROPZONES_DATA__ = !{JSON.stringify(data.dropzones)}
+            | window.__PAGES_DATA__ = !{JSON.stringify(data.pages)}
+

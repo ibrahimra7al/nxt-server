@@ -2,13 +2,26 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom/server';
 import { WidgetDataProvider } from '@atypon/nxt-utils/providers/widget-data';
 import App from '@atypon/nxt-utils/core/pages';
+import { DropzoneDataProvider } from '@atypon/nxt-utils/providers/dropzone-data';
 
-export default ({ data, location }: { data: any; location: string }) => {
+export default ({
+  data,
+  dropzones,
+  location,
+  pages,
+}: {
+  data: any;
+  dropzones: any;
+  pages: any;
+  location: string;
+}) => {
   return (
-    <WidgetDataProvider value={data}>
-      <StaticRouter location={location}>
-        <App />
-      </StaticRouter>
-    </WidgetDataProvider>
+    <DropzoneDataProvider value={dropzones}>
+      <WidgetDataProvider value={data}>
+        <StaticRouter location={location}>
+          <App pages={pages} />
+        </StaticRouter>
+      </WidgetDataProvider>
+    </DropzoneDataProvider>
   );
 };

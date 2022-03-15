@@ -13,28 +13,39 @@ export class RenderService {
   @Inject()
   protected readonly viewsService: ViewsService;
 
-  public render(location: string): Promise<string> {
+  public render(location: string, dropzones: any, pages: any): Promise<string> {
     return Loadable.preloadAll()
       .then(() =>
         this.dataService.preFetchWidgetData(
           this.viewsService.views.app as any,
+          dropzones,
+          pages,
           location,
         ),
       )
       .then((data) =>
-        this.renderDocument(this.viewsService.views.app as any, data, location),
+        this.renderDocument(
+          this.viewsService.views.app as any,
+          data,
+          dropzones,
+          pages,
+          location,
+        ),
       );
   }
 
   protected renderDocument(
     serverApp: (location) => JSX.Element,
     data: any,
+    dropzones: any,
+    pages: any,
     location: string,
   ): string {
     const modules = [];
     const rootComponent = this.viewsService.views.capture(
       serverApp,
       data,
+      dropzones,
       location,
       modules,
     );
@@ -43,6 +54,8 @@ export class RenderService {
       data: {
         helmet: Helmet.renderStatic(),
         data,
+        pages,
+        dropzones,
         bundles: this.dataService.getBundles(modules),
         markup,
       },
