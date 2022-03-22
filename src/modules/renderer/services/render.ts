@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@core';
-import Loadable from 'react-loadable';
+import {preloadAll} from '@react-loadable/revised';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { RenderDataService } from '@renderer/services/render-data';
@@ -14,7 +14,7 @@ export class RenderService {
   protected readonly viewsService: ViewsService;
 
   public render(location: string, dropzones: any, pages: any): Promise<string> {
-    return Loadable.preloadAll()
+    return preloadAll()
       .then(() =>
         this.dataService.preFetchWidgetData(
           this.viewsService.views.app as any,

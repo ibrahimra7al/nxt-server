@@ -1,5 +1,5 @@
 import React from 'react';
-import Loadable from 'react-loadable';
+import {Capture} from '@react-loadable/revised';
 
 export default (
   ServerApp: (location) => JSX.Element,
@@ -9,8 +9,8 @@ export default (
   modules: any,
 ) => {
   return (
-    <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
+    <Capture report={(moduleName) => modules.push(moduleName)}>
       <ServerApp location={location} data={data} dropzones={dropzones} />
-    </Loadable.Capture>
+    </Capture>
   );
 };

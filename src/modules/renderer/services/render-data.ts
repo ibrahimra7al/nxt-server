@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@core';
 import { ViewsService } from './views';
 import PrePass from 'react-ssr-prepass';
-import { getBundles } from 'react-loadable/webpack';
+import {getBundles} from '@react-loadable/revised/lib';
 import stats from '@build/react-loadable.json';
 import manifest from '@build/asset-manifest.json';
 import { ReactElement } from 'react';
@@ -50,7 +50,7 @@ export class RenderDataService {
   }
 
   public getBundles(capturedModules: any[]) {
-    const bundles = getBundles(stats, capturedModules);
+    const {assets:  bundles} = getBundles(stats, capturedModules);
     return {
       css: this.getCssBundles(bundles, manifest),
       js: this.getJsBundles(bundles, manifest),
