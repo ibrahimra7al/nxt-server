@@ -28,4 +28,5 @@ export {
   Header,
   ConsoleLogger as BaseLogger,
   Injectable,
+  Req
 } from '@nestjs/common';
