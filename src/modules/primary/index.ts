@@ -1,5 +1,5 @@
 import { Module } from '@core';
-import { RendererModule } from '@renderer';
+import { RendererModule } from '@rensdfsdfderer';
 @Module({
   imports: [RendererModule],
   controllers: [],
