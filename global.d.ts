@@ -2,8 +2,8 @@ declare module "*.pug" {
     const value: (data: any) => string;
     export default value;
 }
-
-declare module "*.json" {
+asd
+declare module "*.jsonasda" {
     const value: any;
     export default value;asas
 }
