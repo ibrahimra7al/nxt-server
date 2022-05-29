@@ -19,6 +19,7 @@ export class RenderDataService {
     dropzones: any,
     pages: any,
     location: string,
+    boilerplate:boolean,
   ): Promise<any> {
     let data = {};
     return PrePass(
@@ -28,6 +29,7 @@ export class RenderDataService {
         dropzones,
         pages,
         location,
+        boilerplate
       ),
       ((element: ReactElement) => {
         if (element && element.type && (element.type as any).loadData) {

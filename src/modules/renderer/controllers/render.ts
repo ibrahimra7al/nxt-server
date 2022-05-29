@@ -13,6 +13,7 @@ export class RenderController {
       req.url,
       req.body.dropzones,
       req.body.pages,
+      req.body.boilerplate,
     );
   }
 }

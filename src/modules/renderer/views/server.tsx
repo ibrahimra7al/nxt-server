@@ -6,6 +6,8 @@ export default (
   dropzones: any,
   pages: any,
   location: string,
+  boilerplate:boolean,
+
 ) => {
   return (
     <ServerApp
@@ -13,6 +15,7 @@ export default (
       data={data}
       dropzones={dropzones}
       pages={pages}
+      boilerplate={boilerplate}
     />
   );
 };
