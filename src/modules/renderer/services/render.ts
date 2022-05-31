@@ -13,7 +13,7 @@ export class RenderService {
   @Inject()
   protected readonly viewsService: ViewsService;
 
-  public render(location: string, dropzones: any, pages: any, boilerplate:boolean): Promise<string> {
+  public render(location: string, dropzones: any, pages: any): Promise<string> {
     return preloadAll()
       .then(() =>
         this.dataService.preFetchWidgetData(
@@ -21,7 +21,6 @@ export class RenderService {
           dropzones,
           pages,
           location,
-          boilerplate
         ),
       )
       .then((data) =>

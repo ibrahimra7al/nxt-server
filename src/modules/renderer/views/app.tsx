@@ -8,20 +8,18 @@ export default ({
   data,
   dropzones,
   location,
-  pages,
-  boilerplate
+  pages
 }: {
   data: any;
   dropzones: any;
   pages: any;
   location: string;
-  boilerplate: boolean;
 }) => {
   return (
     <DropzoneDataProvider value={dropzones}>
       <WidgetDataProvider value={data}>
         <StaticRouter location={location}>
-          <App pages={pages} boilerplate={boilerplate} />
+          <App pages={pages} />
         </StaticRouter>
       </WidgetDataProvider>
     </DropzoneDataProvider>

@@ -12,8 +12,7 @@ export class RenderController {
     return await this.renderService.render(
       req.url,
       req.body.dropzones,
-      req.body.pages,
-      req.body.boilerplate,
+      req.body.pages
     );
   }
 }

@@ -19,7 +19,6 @@ export class RenderDataService {
     dropzones: any,
     pages: any,
     location: string,
-    boilerplate:boolean,
   ): Promise<any> {
     let data = {};
     return PrePass(
@@ -28,8 +27,7 @@ export class RenderDataService {
         data,
         dropzones,
         pages,
-        location,
-        boilerplate
+        location
       ),
       ((element: ReactElement) => {
         if (element && element.type && (element.type as any).loadData) {
@@ -65,7 +63,7 @@ export class RenderDataService {
     }
     const mainCSS = manifest['main.css'];
     const bundleFilePaths = bundles
-      .filter((bundle) => bundle.file.match(/\.css$/))
+      .filter((bundle) => bundle.match(/\.css$/))
       .map((cssBundle) => `${PUBLIC_URL}/${cssBundle.file}`);
 
     return [mainCSS, ...bundleFilePaths];
@@ -74,7 +72,7 @@ export class RenderDataService {
   protected getJsBundles(bundles: Array<any>, manifest: any): string[] {
     const mainJS = manifest['main.js'];
     const bundleFilePaths = bundles
-      .filter((bundle) => bundle.file.match(/\.js$/))
+      .filter((bundle) => bundle.match(/\.js$/))
       .map((jsBundle) => `${PUBLIC_URL}/${jsBundle.file}`);
 
     return [...bundleFilePaths, mainJS];
