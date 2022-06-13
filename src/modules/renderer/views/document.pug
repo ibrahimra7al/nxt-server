@@ -27,12 +27,13 @@ html(lang=data.lang)
         //- | !{helmet.noscript.toString()}
         //- | !{helmet.script.toString()}
         //- | !{helmet.script.toString()}
-        +loadScripts(data.bundles.js)
+        
     body
-        div#root !{data.markup}
+        #app!=data.markup
         script
-            | window.process = !{env.forIndexHtml};
+            | window.process = !{env ? env.forIndexHtml : "{}" };
             | window.__SERVER_DATA__ = !{JSON.stringify(data.data)}
             | window.__DROPZONES_DATA__ = !{JSON.stringify(data.dropzones)}
             | window.__PAGES_DATA__ = !{JSON.stringify(data.pages)}
 
+        +loadScripts(data.bundles.js)

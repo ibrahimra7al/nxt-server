@@ -13,7 +13,8 @@ export class RenderService {
   @Inject()
   protected readonly viewsService: ViewsService;
 
-  public render(location: string, dropzones: any, pages: any): Promise<string> {
+  public render(location: string, dropzones: any, pages: any, boilerplate:boolean = false): Promise<string> {
+    const docPages = [...pages];
     return preloadAll()
       .then(() =>
         this.dataService.preFetchWidgetData(
@@ -21,16 +22,17 @@ export class RenderService {
           dropzones,
           pages,
           location,
-        ),
+        )
       )
       .then((data) =>
         this.renderDocument(
           this.viewsService.views.app as any,
           data,
           dropzones,
-          pages,
+          docPages,
           location,
-        ),
+          boilerplate,
+        )
       );
   }
 
@@ -40,6 +42,7 @@ export class RenderService {
     dropzones: any,
     pages: any,
     location: string,
+    boilerplate:boolean,
   ): string {
     const modules = [];
     const rootComponent = this.viewsService.views.capture(
@@ -48,6 +51,7 @@ export class RenderService {
       dropzones,
       location,
       modules,
+      pages,
     );
     const markup = ReactDOMServer.renderToString(rootComponent);
     return this.viewsService.views.document({
@@ -56,8 +60,8 @@ export class RenderService {
         data,
         pages,
         dropzones,
-        bundles: this.dataService.getBundles(modules),
         markup,
+        bundles: this.dataService.getBundles(modules, boilerplate),
       },
     });
   }

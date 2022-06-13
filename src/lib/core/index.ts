@@ -30,3 +30,7 @@ export {
   Injectable,
   Req
 } from '@nestjs/common';
+
+export {
+    NestExpressApplication as PlatformApp
+} from '@nestjs/platform-express';

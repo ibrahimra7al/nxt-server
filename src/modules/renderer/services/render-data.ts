@@ -6,8 +6,7 @@ import stats from '@build/react-loadable.json';
 import manifest from '@build/asset-manifest.json';
 import { ReactElement } from 'react';
 
-const PUBLIC_URL = 1,
-  NODE_ENV = process.env.NODE_ENV;
+const  NODE_ENV = process.env.NODE_ENV;
 
 @Injectable()
 export class RenderDataService {
@@ -21,14 +20,16 @@ export class RenderDataService {
     location: string,
   ): Promise<any> {
     let data = {};
-    return PrePass(
-      this.viewsService.views.server(
+    const server = this.viewsService.views.server(
         rootComponent,
         data,
         dropzones,
         pages,
         location
-      ),
+      );
+    
+    return PrePass(
+      server,
       ((element: ReactElement) => {
         if (element && element.type && (element.type as any).loadData) {
           return (element.type as any).loadData(location).then((d) => {
@@ -49,11 +50,11 @@ export class RenderDataService {
     });
   }
 
-  public getBundles(capturedModules: any[]) {
+  public getBundles(capturedModules: any[], boilerplate:boolean) {
     const {assets:  bundles} = getBundles(stats, capturedModules);
     return {
-      css: this.getCssBundles(bundles, manifest),
-      js: this.getJsBundles(bundles, manifest),
+      css: this.getCssBundles(bundles, boilerplate),
+      js: this.getJsBundles(bundles, boilerplate),
     };
   }
 
@@ -61,20 +62,16 @@ export class RenderDataService {
     if (NODE_ENV !== 'production') {
       return [];
     }
-    const mainCSS = manifest['main.css'];
     const bundleFilePaths = bundles
       .filter((bundle) => bundle.match(/\.css$/))
-      .map((cssBundle) => `${PUBLIC_URL}/${cssBundle.file}`);
 
-    return [mainCSS, ...bundleFilePaths];
+    return bundleFilePaths;
   }
 
   protected getJsBundles(bundles: Array<any>, manifest: any): string[] {
-    const mainJS = manifest['main.js'];
     const bundleFilePaths = bundles
-      .filter((bundle) => bundle.match(/\.js$/))
-      .map((jsBundle) => `${PUBLIC_URL}/${jsBundle.file}`);
+      .filter((bundle) => bundle.match(/\.js$/));
 
-    return [...bundleFilePaths, mainJS];
+    return bundleFilePaths;
   }
 }
