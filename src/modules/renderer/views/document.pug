@@ -1,6 +1,6 @@
 mixin prefetchScripts(jsBundles)
     each js in jsBundles
-        link(rel="preload" as="script" href=js)
+        link(rel="prefetch" as="script" href=js)
 
 mixin loadScripts(jsBundles)
     each js in jsBundles
@@ -27,6 +27,7 @@ html(lang=data.lang)
         //- | !{helmet.noscript.toString()}
         //- | !{helmet.script.toString()}
         //- | !{helmet.script.toString()}
+        +loadScripts(data.bundles.js)
         
     body
         #app!=data.markup
@@ -36,4 +37,3 @@ html(lang=data.lang)
             | window.__DROPZONES_DATA__ = !{JSON.stringify(data.dropzones)}
             | window.__PAGES_DATA__ = !{JSON.stringify(data.pages)}
 
-        +loadScripts(data.bundles.js)

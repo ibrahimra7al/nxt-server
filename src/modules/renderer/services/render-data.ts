@@ -3,7 +3,6 @@ import { ViewsService } from './views';
 import PrePass from 'react-ssr-prepass';
 import {getBundles} from '@react-loadable/revised/lib';
 import stats from '@build/react-loadable.json';
-import manifest from '@build/asset-manifest.json';
 import { ReactElement } from 'react';
 
 const  NODE_ENV = process.env.NODE_ENV;
@@ -52,6 +51,7 @@ export class RenderDataService {
 
   public getBundles(capturedModules: any[], boilerplate:boolean) {
     const {assets:  bundles} = getBundles(stats, capturedModules);
+    console.log(bundles);
     return {
       css: this.getCssBundles(bundles, boilerplate),
       js: this.getJsBundles(bundles, boilerplate),
@@ -63,15 +63,13 @@ export class RenderDataService {
       return [];
     }
     const bundleFilePaths = bundles
-      .filter((bundle) => bundle.match(/\.css$/))
+      .filter((bundle) => bundle.endsWith('.css'))
 
     return bundleFilePaths;
   }
 
   protected getJsBundles(bundles: Array<any>, manifest: any): string[] {
-    const bundleFilePaths = bundles
-      .filter((bundle) => bundle.match(/\.js$/));
-
+    const bundleFilePaths = bundles.filter(file => file.endsWith('.js')	);
     return bundleFilePaths;
   }
 }
