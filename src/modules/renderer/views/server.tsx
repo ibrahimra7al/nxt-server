@@ -5,7 +5,7 @@ export default (
   data: any,
   dropzones: any,
   pages: any,
-  location: string,
+  location: string
 ) => {
   return (
     <ServerApp

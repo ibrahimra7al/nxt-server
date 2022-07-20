@@ -8,7 +8,7 @@ export default ({
   data,
   dropzones,
   location,
-  pages,
+  pages
 }: {
   data: any;
   dropzones: any;

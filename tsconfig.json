@@ -25,7 +25,10 @@
       "@primary/*": ["./src/modules/primary/*"],
       "@renderer": ["./src/modules/renderer/index.ts"],
       "@renderer/*": ["./src/modules/renderer/*"],
-      "@core": ["./src/lib/core/index.ts"]
+      "@variants": ["./src/modules/variants/index.ts"],
+      "@variants/*": ["./src/modules/variants/*"],
+      "@core": ["./src/lib/core/index.ts"],
+      "@json/*": ["./src/json/*"]
     }
   }
 }

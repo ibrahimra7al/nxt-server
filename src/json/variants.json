@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Default",
+        "id": "default"
+    },
+    {
+        "name": "Photo",
+        "id": "photo"
+    },
+    {
+        "name": "Classic",
+        "id": "classic"
+    },
+    {
+        "name": "Eureka",
+        "id": "eureka"
+    },
+    {
+        "name": "Next Generation",
+        "id": "next-gen"
+    }
+]

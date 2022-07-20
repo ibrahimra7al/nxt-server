@@ -7,10 +7,11 @@ export default (
   dropzones: any,
   location: string,
   modules: any,
+  pages: any,
 ) => {
   return (
     <Capture report={(moduleName) => modules.push(moduleName)}>
-      <ServerApp location={location} data={data} dropzones={dropzones} />
+      <ServerApp location={location} data={data} dropzones={dropzones} pages={pages} />
     </Capture>
   );
 };
