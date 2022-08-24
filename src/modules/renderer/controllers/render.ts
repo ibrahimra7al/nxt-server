@@ -9,8 +9,9 @@ export class RenderController {
 
   @Post('/')
   async render(@Req() req: Request) {
+   const isNXTStoryBookServer = Boolean(req.headers['x-nxt-story-server'])
     return await this.renderService.render(
-      req.url,
+      isNXTStoryBookServer ? '/iframe.html' : req.url,
       req.body.dropzones,
       req.body.pages,
       req.body.boilerplate,

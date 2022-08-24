@@ -51,7 +51,6 @@ export class RenderDataService {
 
   public getBundles(capturedModules: any[], boilerplate:boolean) {
     const {assets:  bundles} = getBundles(stats, capturedModules);
-    console.log(bundles);
     return {
       css: this.getCssBundles(bundles, boilerplate),
       js: this.getJsBundles(bundles, boilerplate),
