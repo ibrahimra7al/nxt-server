@@ -3,6 +3,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { WidgetDataProvider } from '@atypon/nxt-utils/providers/widget-data';
 import App from '@atypon/nxt-utils/core/pages';
 import { DropzoneDataProvider } from '@atypon/nxt-utils/providers/dropzone-data';
+import '@atypon/nxt-base-styles-loader/src/base.scss';
 
 export default ({
   data,
